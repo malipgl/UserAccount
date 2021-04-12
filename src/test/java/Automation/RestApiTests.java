@@ -47,6 +47,20 @@ public class RestApiTests {
     }
 
     @Test
+    public void createFailsUserAccountTest(){
+        UserAccount userAccount = userAccount();
+        userAccount.setPhone(111111111111111L);
+
+        given().
+                header("Content-Type", "application/json").
+                body(userAccount).
+                when().
+                post("http://localhost:8081/createUserAccount").
+                then().
+                statusCode(500);
+    }
+
+    @Test
     public void deleteUserAccountTest(){
         UserAccountUpdateDTO updateUserAccountDTO = userAccountUpdateDTO();
         given().
